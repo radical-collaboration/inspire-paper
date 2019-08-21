@@ -1,0 +1,142 @@
+\newif\ifdraft
+% \drafttrue
+\draftfalse
+
+\ifdraft
+ \newcommand{\jhanote}[1]{\textcolor{red}  {***SJ: #1}}
+ \newcommand{\vbnote}[1]{ {\textcolor{blue} { ***VB: #1 }}}
+ \newcommand{\note}[1]{ {\textcolor{blue} { ***Note: #1 }}}
+ \newcommand{\mrsnote}[1]{\textcolor{olive} { ***MRS: #1 }}
+ \newcommand{\jdnote}[1]{ {\textcolor{orange} { ***JD: #1 }}}
+ \newcommand{\tjnote}[1]{ {\textcolor{green} { ***TJ: #1 }}}
+ \newcommand{\mtnote}[1]{ {\textcolor{purple} { ***MT: #1 }}}
+\else
+ \newcommand{\jhanote}[1]{}
+ \newcommand{\vbnote}[1]{}
+ \newcommand{\note}[1]{}
+ \newcommand{\mrsnote}[1]{}
+ \newcommand{\jdnote}[1]{}
+ \newcommand{\tjnote}[1]{}
+ \newcommand{\mtnote}[1]{}
+\fi
+
+
+\newcommand{\cloud}{cloud\xspace}
+\newcommand{\clouds}{clouds\xspace}
+\newcommand{\pilot}{Pilot\xspace}
+\newcommand{\pilots}{Pilots\xspace}
+\newcommand{\pilotjob}{Pilot-Job\xspace}
+\newcommand{\pilotjobs}{Pilot-Jobs\xspace}
+\newcommand{\pilotcompute}{Pilot-Compute\xspace}
+\newcommand{\pilotcomputedescription}{Pilot-Compute Description\xspace}
+\newcommand{\pilotdescription}{Pilot-Description\xspace}
+\newcommand{\pilotcomputes}{Pilot-Computes\xspace}
+\newcommand{\pilotdata}{Pilot-Data\xspace}
+\newcommand{\pilotdatadescription}{Pilot-Data Description\xspace}
+\newcommand{\pilotdataservice}{Pilot-Data Service\xspace}
+\newcommand{\pilotcomputeservice}{Pilot-Compute Service\xspace}
+\newcommand{\computedataservice}{Compute-Data Service\xspace}
+\newcommand{\computeunitdescription}{Compute-Unit Description\xspace}
+\newcommand{\dataunitdescription}{Data-Unit Description\xspace}
+\newcommand{\pilotmapreduce}{PilotMapReduce\xspace}
+\newcommand{\mrmg}{MR-Manager\xspace}
+\newcommand{\pstar}{P*\xspace}
+\newcommand{\pd}{PD\xspace}
+\newcommand{\pc}{PC\xspace}
+\newcommand{\pcs}{PCs\xspace}
+\newcommand{\pj}{PJ\xspace}
+\newcommand{\pjs}{PJs\xspace}
+\newcommand{\pds}{Pilot Data Service\xspace}
+\newcommand{\computeunit}{Compute-Unit\xspace}
+\newcommand{\computeunits}{Compute-Units\xspace}
+\newcommand{\dataunit}{Data-Unit\xspace}
+\newcommand{\dataunits}{Data-Units\xspace}
+\newcommand{\du}{DU\xspace}
+\newcommand{\dus}{DUs\xspace}
+\newcommand{\dud}{DUD\xspace}
+\newcommand{\cu}{CU\xspace}
+\newcommand{\cus}{CUs\xspace}
+\newcommand{\cud}{CUD\xspace}
+\newcommand{\su}{SU\xspace}
+\newcommand{\sus}{SUs\xspace}
+\newcommand{\schedulableunit}{Schedulable Unit\xspace}
+\newcommand{\schedulableunits}{Schedulable Units\xspace}
+\newcommand{\cc}{c\&c\xspace}
+\newcommand{\CC}{C\&C\xspace}
+\newcommand{\up}{\vspace*{-1em}}
+\newcommand{\upp}{\vspace*{-0.5em}}
+\newcommand{\numrep}{8 }
+\newcommand{\samplenum}{4 }
+\newcommand{\tmax}{$T_{max}$ }
+\newcommand{\tc}{$T_{C}$ }
+\newcommand{\tcnsp}{$T_{C}$}
+\newcommand{\bj}{BigJob\xspace}
+\newcommand{\irods}{iRODS\xspace}
+\newcommand{\entk}{EnTK\xspace}
+\newcommand{\rp}{RADICAL-Pilot\xspace}
+\newcommand{\ee}{expanded ensemble\xspace}
+\newcommand{\msm}{adaptive msm\xspace}
+
+\newcommand{\I}[1]{\textit{#1}\xspace}
+\newcommand{\B}[1]{\textbf{#1}\xspace}
+\newcommand{\T}[1]{\texttt{#1}\xspace}
+%\newcommand{\C}[1]{\textsc{#1}\xspace}
+
+\newcommand{\mr}[1]{\multirow{2}{*}{#1}}%
+\newcommand{\mc}[2]{\multicolumn{#1}{l}{#2}}
+
+ \lstset{ backgroundcolor=\color{white},
+ basicstyle=\ttfamily\scriptsize, % the size of the fonts that are used for the code 
+ breakatwhitespace=false, % sets if automatic breaks should only happen at whitespace 
+ breaklines=true, % sets automatic line breaking 
+ captionpos=b, % sets the caption-position to bottom 
+ commentstyle=\color{mygreen}, % comment style 
+ escapeinside={\%*}{*)}, % if you want to add LaTeX within your code 
+ extendedchars=true, % lets you use non-ASCII characters; for 8-bits encreadreading twitter ing twitter odings only, does not work with UTF-8
+ frame=single, % adds a frame around the code 
+ keepspaces=true, % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)  
+ keywordstyle=\color{blue}, % keyword style 
+ language=Python, % the language of the code 
+ numbers=none, % where to put the line-numbers; possible values are (none, left, right) 
+ numbersep=5pt, % how far the line-numbers are from the code 
+ numberstyle=\tiny\color{gray}, % the style that is used for the line-numbers 
+ rulecolor=\color{white}, % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here)) 
+ showspaces=false, % show spaces everywhere adding particular underscores; it overrides 'showstringspaces' 
+ showstringspaces=false, % underline spaces within strings only 
+ showtabs=false, % show tabs within strings adding particular underscores 
+ stepnumber=2, % the step between two line-numbers. If it's 1, each line will be numbered 
+ stringstyle=\color{mauve}, % string literal style 
+ tabsize=2, % sets default tabsize to 2 spaces 
+}
+
+%  \setlength{\parskip}{0.05ex} % 1ex plus 0.5ex minus 0.2ex}
+%  \setlength{\parsep}{0pt}
+%  %\setlength{\headsep}{0pt}
+%  \setlength{\topskip}{0pt}
+%  \setlength{\topmargin}{0pt}
+%  %\setlength{\topsep}{0pt}
+%  \setlength{\partopsep}{0pt}
+
+% This is now the recommended way for checking for PDFLaTeX:
+
+
+\ifpdf
+\DeclareGraphicsExtensions{.pdf, .jpg, .tif}
+\else
+\DeclareGraphicsExtensions{.ps,  .eps, .jpg}
+\fi
+
+\tolerance=1000
+\hyphenpenalty=10
+
+\pdfsuppresswarningpagegroup=1
+
+
+\let\origdescription\description
+\renewenvironment{description}{
+  \setlength{\leftmargini}{0em}
+  \origdescription
+  \setlength{\itemindent}{0em}
+  \setlength{\labelsep}{\textwidth}
+}
+{\endlist}
