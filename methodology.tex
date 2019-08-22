@@ -1,0 +1,87 @@
+%!TEX root = main.tex
+\subsection{Predictive modelling}
+
+
+In employing predictive, physical modelling techniques we have focussed on two
+primary challenges: (1) generating realistic starting models of proteins (and
+variants) for which no experimental structure exists; and (2) estimating
+binding strength from a model of a given protein-ligand complex. To build
+models of inhibitor/kinase complexes, we draw from the many available
+structures in the PDB database as input for our comparative modelling
+pipeline. Our pipeline models the kinase of interest by analogy to related
+kinase structures, and positions the inhibitor in the active site through
+reference to other inhibitors. This initial model is then refined using the
+Rosetta modelling suite. This approach has yielded accurate models in previous
+test cases [1], making us confident to apply it at larger scale in these
+studies. Molecular dynamics (MD) based free energy calculations represent a
+practical, quantitative, generalizable approach to predicting the impact of
+clinically observed mutations on kinase inhibitor affinity. In this project we
+have developed and refined protocols based on both cheap end-point methods
+(ESMACS) and more expensive and potentially accurate alchemical methods (TIES
+and YANK).  Key to refining our existing protocols is careful
+uncertainty quantification, avoiding the common issue that the calculated
+statistical error underestimates the true variation among independent
+experiments. As part of the project we have also investigated the utility of
+enhanced sampling methods for situations where mutations may alter the binding
+mode of ligands. Machine Learning
+
+\subsection{Machine Learning}
+
+INSPIRE leverages the models and techniques developed in the synergistic,
+“Exascale Deep Learning and Simulation Enabled Precision Medicine for Cancer”
+(CANDLE) project supported by the US Department of Energy and  National Cancer
+Institute. Key to our approach is the use of a wide range of data sources and
+guided data collection from simulation and experiment in order to accurately
+span the known space of drug-like molecules. This space is currently not fully
+understood, and for that reason is difficult to span by common machine
+learning models. Standard virtual screening techniques have shown the
+difficulty of attempting to apply individual modelling to each and every
+molecule within a set of filters. Active learning is an approach to data
+sampling which weighs the model uncertainty with the computational cost to
+continue training the model. Active learning is used to train a surrogate
+molecular dynamics model, which can be run in seconds — a fraction of the time
+it takes to run a standard MD simulation. Using this surrogate model, it is
+possible to test previously intractable sets of molecules. Generative neural
+networks are capable of producing novel molecules with certain constraints and
+properties [4].  This approach allows molecules to be generated based on
+desirable properties and embedded in continuous representations to draw new
+molecules from a distribution. Our approach combines the benefits of active
+learning with generated molecular training data.
+
+\subsection{Combining MD and ML Workflows}
+
+The INSPIRE approach relies upon the creation of workflows which combine
+expensive but accurate free energy calculations with fast ML models. While
+ultimately we intend to predict the affinity of compounds to wide ranges of
+disease-relevant kinases and clinically identified kinase mutants, we have
+initially focussed on a subgoal;  prioritizing the use of MD simulations to
+assign binding affinities to small molecule on a large set of small molecule
+drug candidates. Given a vast set of candidate drugs, what is the optimal
+ordering of simulating candidates to improve overall predictive screening
+performance using limited computer resource? Addressing this question is the
+basis of our prototype workflow (which initially targets a single kinase -
+Abl1), described below.
+
+
+Figure 1 Schematic overview of the INSPIRE lead identification workflow.
+
+\paragraph{Step: 1 \& 2:} The generation module samples from a known dataset (producing candidates as SMILES strings), but we will scale this to sampling from a variational autoencoder guided by a biasing filter. Bias is an optional module which restricts the generation module based on a particular subspace, dataset, or biochemical feature. Allowing explicit filtering using functions available in RDKit or OpenEye.  3D compound coordinates are generated from the SMILES, and docked into the pre-prepared protein conformation. The docking score is the first (and cheapest) binding strength estimate passed to the ML model. 
+
+\paragraph{Step: 3 :} The structure of the protein-ligand complex is prepared for simulation using one of our chosen free energy computations, ranging from ESMACS to the more expensive and rigorous TIES and YANK, which provides trajectories and binding free energy estimates (with associated uncertainties). 
+
+\paragraph{Step: 4:} Model is a deep neural network which predicts the binding free energy of a ligand. Initially the only input is the featurized SMILES string, though we will extend this to include topologies and  trajectories. 
+
+\paragraph{Step: 5:}  The Active Learning module ingests the SMILES, free energy estimate and Model output and returns information to the generator either in the form of the next sample or a space to continue sampling. 
+
+Execution of a prototype workflow requires the coordination not only of the overall workflow but multi-stage pipelines of molecular simulations. To support the scalable, adaptive and automated calculation of the binding free energies concurrently with ML method on HPC resources, we are developing workflow automation tools based on the RADICAL-Cybertools middleware building block approach [5]. This allows us to to attain both workflow flexibility and performance.
+
+This workflow is executed on Summit (Oak Ridge National Laboratory), currently
+the world’s fastest supercomputer. The NVIDIA Volta GPUs employed allow single
+OpenMM runs to generate 700+ nanoseconds of trajectory per day. However, the
+novel architecture of the system means tools that we have previously relied
+upon are currently unavailable. Consequently, our workflow has been adapted to
+make use of communication with a cluster running containers for docking and
+ligand preparation.
+
+The next section details the software system to support the concurrent
+execution of  MD and ML tasks.

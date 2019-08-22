@@ -1,1 +1,18 @@
-%!TEX root = main.tex
+Machine learning (ML) represents a set of techniques that thrive in inferring complex relationships from large scale data.
+It has already transformed the fields of computer vision, robotics, game playing, and natural language processing.
+Even in the challenging fields of biomedical sciences and chemoinformatics, machine learning has achieved high performance across many different tasks.
+Examples include classifying kinase conformations \cite{mcskimming2017classifying}, predicting antimicrobial resistance \cite{davis2016antimicrobial}, modeling quantitative structure--activity relationships \cite{ma2015deep, gomes2017atomic}, and predicting contact maps in protein folding \cite{wang2017accurate}.
+In the field of drug discovery, \textbf{developments in deep learning make it possible to generate novel drug-like molecules \textit{in silico} which sample the whole chemical space of relevance} (estimated to contain \textasciitilde10$^{60}$ compounds) ~\cite{schrodinger-active-learning, Segler2018:rnn}.
+However, applying these methods in `real world' industrial projects has revealed affinity prediction to be the major bottleneck hindering their use to accelerate the development of new therapeutics.
+While performance might be improved through novel ML algorithms or access to more training data, the most efficient way to improve binding affinity predictions would be to combine these approaches with physics based modelling, i.e. free-energy calculations. 
+%Such modelling would reduce the need for additional experimentally generated data. 
+This approach optimizes requirements for additional, expensive, experimental data.
+
+Recent improvements in computational power and algorithm design mean that reliably quantifying binding strength (free energy) from molecular simulation is now becoming a genuine possibility.
+These developments have led to increased interest in the use of molecular simulations for applications in both computer-aided drug design and personalized medicine.
+{\bf Molecular simulation based free energy calculations represent a practical, quantitative, generalizable approach to predicting the protein--ligand affinity.}
+
+The goal of this project is to use deep learning to develop a framework to effectively combine expensive but accurate molecular dynamics (MD) based binding free energy (BFE) calculations with fast machine learning models to predict the affinity of compounds.
+In this approach, candidates are sampled from a large billion-compound synthetically accessible space (such as Enamine REAL\cite{enamine-real}) or selected using a biasing filter from the output of a deep learning based \textit{de novo} molecule generator. 
+Sampling is designed to rapidly and parsimoniously train an inexpensive surrogate model from BFE calculations, creating a tool capable of accurately scoring vast libraries of molecules.
+This will be achieved by using an active learning approach to guide the choice of the BFE calculations performed.%!TEX root = main.tex
